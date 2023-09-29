@@ -1,19 +1,25 @@
-let country = "Iran";
-let continent = "miduless";
-let population = 85;
-console.log(country);
-console.log(continent);
-console.log(population);
+// let country = "Iran";
+// let continent = "miduless";
+// let population = 85;
+// console.log(country);
+// console.log(continent);
+// console.log(population);
 
-console.log(typeof true);
-console.log(typeof 23);
-console.log(typeof "jonas");
+// console.log(typeof true);
+// console.log(typeof 23);
+// console.log(typeof "jonas");
 
-country = 123;
-console.log(country);
+// country = 123;
+// console.log(country);
 
-let isIsland = false;
-let language;
-console.log(isIsland);
-console.log(language);
-console.log(isIsland);
+// let isIsland = false;
+// let language;
+// console.log(isIsland);
+// console.log(language);
+// console.log(isIsland);
+// let language = "persian";
+// console.log(language);
+// language = "English";
+// const GENDER = "MALE";
+// console.log(GENDER);
+// console.log(typeof GENDER);
