@@ -42,9 +42,31 @@
 // console.log(ageSarah >= 18);
 // const isFullAge = ageSarah >= 18;
 // console.log(now - 1991 < now - 2010);
-let x, y;
-x = y = 25 - 10 - 5;
-console.log(x, y);
-let yazdan = 12;
-let hossien = 10;
-const averageAge = yazdan + hossien / 2;
+// let x, y;
+// x = y = 25 - 10 - 5;
+// console.log(x, y);
+// let yazdan = 12;
+// let hossien = 10;
+// const averageAge = yazdan + hossien / 2;
+const firstName = "Yazdan";
+const job = "Backend development";
+const birthday = 1991;
+const year = 2037;
+const yazdan =
+  "I'm " +
+  firstName +
+  ", a " +
+  (year - birthday) +
+  " years old " +
+  " job " +
+  job;
+console.log(yazdan);
+
+const jonasNew = `I'm ${firstName} , a ${
+  year - birthday
+} year and job is ${job}`;
+console.log(jonasNew);
+console.log(`string 
+multilines
+break.`);
+console.log("String \n multilines \n break.");
