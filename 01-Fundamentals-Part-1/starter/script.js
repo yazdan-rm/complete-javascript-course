@@ -48,25 +48,41 @@
 // let yazdan = 12;
 // let hossien = 10;
 // const averageAge = yazdan + hossien / 2;
-const firstName = "Yazdan";
-const job = "Backend development";
-const birthday = 1991;
-const year = 2037;
-const yazdan =
-  "I'm " +
-  firstName +
-  ", a " +
-  (year - birthday) +
-  " years old " +
-  " job " +
-  job;
-console.log(yazdan);
+// const firstName = "Yazdan";
+// const job = "Backend development";
+// const birthday = 1991;
+// const year = 2037;
+// const yazdan =
+//   "I'm " +
+//   firstName +
+//   ", a " +
+//   (year - birthday) +
+//   " years old " +
+//   " job " +
+//   job;
+// console.log(yazdan);
 
-const jonasNew = `I'm ${firstName} , a ${
-  year - birthday
-} year and job is ${job}`;
-console.log(jonasNew);
-console.log(`string 
-multilines
-break.`);
-console.log("String \n multilines \n break.");
+// const jonasNew = `I'm ${firstName} , a ${
+//   year - birthday
+// } year and job is ${job}`;
+// console.log(jonasNew);
+// console.log(`string
+// multilines
+// break.`);
+// console.log("String \n multilines \n break.");
+// let a = 12;
+// let b = 23;
+// console.log(a + b);
+// console.log(typeof `yazdan`);
+// console.log(typeof false);
+
+// let countryPopulation = 8000000;
+
+// console.log(countryPopulation / 2);
+// console.log(countryPopulation++);
+// const findLand = 6000000;
+// console.log(countryPopulation > findLand);
+// console.log(countryPopulation > 33000000);
+// const description = `Iran is in Aea, and is's ${countryPopulation} million people speak persian in there.`;
+
+// console.log(description);
