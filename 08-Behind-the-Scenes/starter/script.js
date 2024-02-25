@@ -109,9 +109,41 @@ const jonas = {
   firstName: 'Jonas',
   year: 1991,
   calcAge: function () {
+    console.log(this);
     console.log(2037 - this.year);
+    // Solution 1
+    // const self = this;
+    // const isMillenial = function () {
+    //   console.log(self.year >= 1981 && self.year <= 1996);
+    // };
+
+    // Solution 2
+    const isMillenial = () => {
+      console.log(this);
+      console.log(this.year >= 1981 && this.year <= 1996);
+    };
+    isMillenial();
   },
   greet: () => console.log(`Hey ${this.firstName}`),
 };
 
 jonas.greet();
+jonas.calcAge();
+
+// argument keyword
+const addExpr = function (a, b) {
+  console.log(arguments);
+  console.log(arguments[0]);
+  return a + b;
+};
+
+addExpr(2, 3);
+addExpr(2, 3, 4);
+
+const addArrow = (a, b) => {
+  console.log(arguments);
+  return a + b;
+};
+
+addArrow(2, 3);
+addArrow(2, 3, 4);
