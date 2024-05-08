@@ -32,13 +32,13 @@ const restaurant = {
 
   orderDelivery({ starterIndex = 1, mainIndex = 0, time = '20:00', address }) {
     console.log(
-      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`
+      `Order received! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`,
     );
   },
 
   orderPasta(ing1, ing2, ing3) {
     console.log(
-      `Here is your declicious pasta with ${ing1}, ${ing2} and ${ing3}`
+      `Here is your declicious pasta with ${ing1}, ${ing2} and ${ing3}`,
     );
   },
 
@@ -65,7 +65,7 @@ for (const flight of flights.split('+')) {
   const [type, from, to, time] = flight.split(';');
   const output = `${type.startsWith('_Delayed') ? '🔴' : ''}${type.replaceAll(
     '_',
-    ' '
+    ' ',
   )} ${getCode(from)} ${getCode(to)} (${time.replace(':', 'h')})`.padStart(36);
   console.log(output);
 }
@@ -336,7 +336,6 @@ for (const [min, event] of gameEvents) {
 }
 */
 
-/*
 ///////////////////////////////////////
 // Maps: Iteration
 const question = new Map([
@@ -372,7 +371,6 @@ console.log([...question]);
 console.log([...question.keys()]);
 console.log([...question.values()]);
 
-
 ///////////////////////////////////////
 // Maps: Fundamentals
 const rest = new Map();
@@ -406,7 +404,6 @@ console.log(rest.size);
 
 console.log(rest.get(arr));
 
-
 ///////////////////////////////////////
 // Sets
 const ordersSet = new Set([
@@ -438,11 +435,10 @@ const staffUnique = [...new Set(staff)];
 console.log(staffUnique);
 
 console.log(
-  new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
+  new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size,
 );
 
 console.log(new Set('jonasschmedtmann').size);
-*/
 
 ///////////////////////////////////////
 // Coding Challenge #2
