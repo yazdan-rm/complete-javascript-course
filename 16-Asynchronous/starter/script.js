@@ -2,6 +2,7 @@
 
 const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
+const imagesContainer = document.querySelector('.images');
 
 const renderError = function(msg) {
   countriesContainer.insertAdjacentText('beforeend', msg);
@@ -208,16 +209,144 @@ const getJson = function(url, errorMsg = 'Something went wrong') {
 // whereAmI(19.037, 72.873);
 // whereAmI(-33.933, 18.474);
 
+// console.log('Test start');
+// setTimeout(()=> console.log('0 sec timer'), 0);
+// Promise.resolve('Resolved promise 1').then(res =>
+// console.log(res));
+//
+// Promise.resolve('Resolved promise 2').then(res =>{
+//   for(let i = 0; i < 1000000000; i++){}
+//   console.log(res);
+// })
+// console.log('test end');
 
+// const lotteryPromise = new Promise((resolve, reject) => {
+//   console.log('Lottery draw is happening 🔮');
+//   setTimeout(() => {
+//     if (Math.random() >= 0.5) {
+//       resolve('You win 🤑');
+//     } else {
+//       reject(new Error('You lost your money 💩'));
+//     }
+//   }, 2000);
+// });
+//
+// lotteryPromise
+//   .then(res => console.log(res))
+//   .catch(err => console.error(err));
+//
+// // Promisify setTimeout
+const wait = function(seconds) {
+  return new Promise(resolve => setTimeout(resolve, seconds * 1000));
+};
+//
+// wait(2)
+//   .then(() => {
+//     console.log('I waited for 2 seconds');
+//     return wait(1);
+//   })
+//   .then(() => console.log('I waited for 1 seconds'));
+//
+// const getPosition = function(){
+//   return new Promise((resolve, reject) =>{
+//     navigator.geolocation.getCurrentPosition(resolve, reject);
+//   });
+// };
+//
+// const whereAmI = function() {
+//   getPosition()
+//     .then(data => {
+//       const {latitude: lat, longitude: lng} = data.coords;
+//       return  fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=452974544739329260552x10709`);
+//     })
+//     .then(response => {
+//       if (!response.ok) throw new Error(`${response.status} (${response.ok})`);
+//       return response.json();
+//     })
+//     .then(json => {
+//       console.log(`You are in ${json.city}, ${json.country}`);
+//       return fetch(`https://restcountries.com/v3.1/name/${json.country.toLowerCase()}`);
+//     })
+//     .then(res => res.json())
+//     .then(json => renderCountry(json[0]))
+//     .catch(error => {
+//       console.log(error.message);});
+// };
+//
+// whereAmI();
 
+//////////////////////////////////////////////////
+// Coding Challenge #2
 
+// const createImage = function(imgPath) {
+//   return new Promise((resolve, reject) => {
+//     const imageEl = document.createElement('img');
+//     imageEl.src = imgPath;
+//
+//     imageEl.addEventListener('load', function() {
+//       imagesContainer.append(imageEl);
+//       resolve(imageEl);
+//     });
+//
+//     imageEl.addEventListener('error', () => reject(new Error('Image not found :(')));
+//   });
+// };
+//
+// let currentImg;
+// createImage('./img/img-1.jpg').then(imageEl => {
+//   currentImg = imageEl;
+//   console.log('Image 1 loaded');
+//   return wait(2)
+// }).then(()=> {
+//     wait(2).then(() => {
+//       currentImg.style.display = 'none';
+//       return createImage('./img/img-2.jpg');
+//     }).then(img => {
+//       currentImg = img;
+//       console.log('Image 2 loaded');
+//       return wait(2)
+//
+//     }).then(() => {
+//       currentImg.style.display = 'none';
+//     })
+//   }).catch((e) => {
+//     console.error(e);});
 
+const getPosition = function() {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
 
+const whereAmI = async function() {
+try {
+  const pos = await getPosition();
+  const { latitude: lat, longitude: lng } = pos.coords;
+  const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=452974544739329260552x10709`);
+  if(!resGeo.ok) throw new Error('Problem getting geolocation');
+  const dataGeo = await resGeo.json();
+  console.log(dataGeo);
 
+  const res = await fetch(`https://restcountries.com/v3.1/name/${dataGeo.country}`);
+  if(!res.ok) throw new Error('Problem getting geolocation');
+  const data = await res.json();
+  renderCountry(data[0]);
+}catch(err) {
+  console.error(err);
+  renderError('something went wrong!');
+}
+};
 
+whereAmI('iran');
+console.log('FIRST');
 
-
-
+// try{
+//   let y = 1;
+//   const x = 2;
+//   x = 2;
+// }catch(e){
+//   alert(e.message);
+// }
 
 
 
