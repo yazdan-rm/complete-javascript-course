@@ -312,41 +312,189 @@ const wait = function(seconds) {
 //   }).catch((e) => {
 //     console.error(e);});
 
-const getPosition = function() {
+// const getPosition = function() {
+//   return new Promise((resolve, reject) => {
+//     navigator.geolocation.getCurrentPosition(resolve, reject);
+//   });
+// };
+//
+// const whereAmI = async function() {
+//   try {
+//     const pos = await getPosition();
+//     const { latitude: lat, longitude: lng } = pos.coords;
+//     const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=452974544739329260552x10709`);
+//     if (!resGeo.ok) throw new Error('Problem getting geolocation');
+//     const dataGeo = await resGeo.json();
+//
+//     const res = await fetch(`https://restcountries.com/v3.1/name/${dataGeo.country}`);
+//     if (!res.ok) throw new Error('Problem getting geolocation');
+//     const data = await res.json();
+//     renderCountry(data[0]);
+//
+//     return `You are in ${dataGeo.city}, ${dataGeo.country}`;
+//   } catch (err) {
+//     renderError('something went wrong!');
+//
+//     // Reject promise returned from async function
+//   }
+// };
+
+// console.log('1: Will get location');
+// const city = whereAmI('iran');
+// console.log(city);
+
+// whereAmI()
+//   .then(data => console.log(data))
+//   .catch(err => console.error(`2: ${err.message} 💥`))
+//   .finally(() => console.log('3: Finished getting location'));
+// console.log('2: Finished getting location');
+
+// (async function() {
+//   try{
+//     const data = await whereAmI();
+//     console.log(data);
+//   }catch(err){
+//     console.error(`2: ${err.message} 💥`);
+//   }finally {
+//     console.log('3: Finished getting location')
+//   }
+// })();
+//
+// const get3Countries = async function(c1, c2, c3) {
+//   try {
+//     // const [data1] = await getJson(`https://restcountries.com/v3.1/name/${c1}`);
+//     // const [data2] = await getJson(`https://restcountries.com/v3.1/name/${c2}`);
+//     // const [data3] = await getJson(`https://restcountries.com/v3.1/name/${c3}`);
+//
+//     const data = await Promise.all([
+//       getJson(`https://restcountries.com/v3.1/name/${c1}`),
+//       getJson(`https://restcountries.com/v3.1/name/${c2}`),
+//       getJson(`https://restcountries.com/v3.1/name/${c3}`)
+//     ]);
+//
+//     console.log(data.map(d => d[0].capital[0]));
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
+//
+// get3Countries('portugal', 'canada', 'tanzania');
+//
+// // Promise.race
+// (async () => {
+//   const res = await Promise.race([
+//     getJson(`https://restcountries.com/v3.1/name/italy`),
+//     getJson(`https://restcountries.com/v3.1/name/egypt`),
+//     getJson(`https://restcountries.com/v3.1/name/mexico`)
+//   ]);
+//
+//   console.log(res[0]);
+// })();
+//
+// const timeout = function(sec) {
+//   return new Promise(function(_, reject) {
+//     setTimeout(() => {
+//       reject(new Error('Request took too long!'));
+//     }, sec);
+//   });
+// };
+//
+// Promise.race([
+//   getJson(`https://restcountries.com/v3.1/name/italy`),
+//   timeout(1)
+// ]).then(res => console.log(res[0]))
+//   .catch(err => console.error(err));
+//
+// // Promise.allSettled
+// Promise.allSettled([
+//   Promise.resolve('Success'),
+//   Promise.reject('Error'),
+//   Promise.resolve('Another Success'),
+// ]).then(res => console.log(res));
+//
+// Promise.all([
+//   Promise.resolve('Success'),
+//   Promise.reject('Error'),
+//   Promise.resolve('Another Success'),
+// ]).then(res => console.log(res))
+//   .catch(err => console.error(err));
+//
+// // Promise.any [ES2021]
+// Promise.any([
+//   Promise.resolve('Success'),
+//   Promise.reject('Error'),
+//   Promise.resolve('Another Success'),
+// ]).then(res => console.log(res))
+//   .catch(err => console.error(err));
+
+////////////////////////////////////////////////
+// Coding Challenge #3
+
+const createImage = function(imgPath) {
   return new Promise((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject);
+    const imageEl = document.createElement('img');
+    imageEl.src = imgPath;
+
+    imageEl.addEventListener('load', function() {
+      imagesContainer.append(imageEl);
+      resolve(imageEl);
+    });
+
+    imageEl.addEventListener('error', () => reject(new Error('Image not found :(')));
   });
 };
 
-const whereAmI = async function() {
-try {
-  const pos = await getPosition();
-  const { latitude: lat, longitude: lng } = pos.coords;
-  const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json&auth=452974544739329260552x10709`);
-  if(!resGeo.ok) throw new Error('Problem getting geolocation');
-  const dataGeo = await resGeo.json();
-  console.log(dataGeo);
+// let currentImg;
+// createImage('./img/img-1.jpg').then(imageEl => {
+//   currentImg = imageEl;
+//   console.log('Image 1 loaded');
+//   return wait(2);
+// }).then(() => {
+//   currentImg.style.display = 'none';
+//   return createImage('./img/img-2.jpg');
+// }).then(img => {
+//   currentImg = img;
+//   console.log('Image 2 loaded');
+//   return wait(2);
+//
+// }).then(() => {
+//   currentImg.style.display = 'none';
+// })
+//   .catch((e) => {
+//       console.error(e);
+//     }
+//   );
 
-  const res = await fetch(`https://restcountries.com/v3.1/name/${dataGeo.country}`);
-  if(!res.ok) throw new Error('Problem getting geolocation');
-  const data = await res.json();
-  renderCountry(data[0]);
-}catch(err) {
-  console.error(err);
-  renderError('something went wrong!');
+
+async function loadNPause(){
+  try{
+    let currImg = await createImage('./img/img-1.jpg');
+    console.log('Image 1 loaded');
+    await wait(2);
+    currImg.style.display = 'none';
+    currImg = await createImage('./img/img-2.jpg');
+    console.log('Image 2 loaded');
+    await wait(2);
+    currImg.style.display = 'none';
+  }catch(e){
+    console.error(e);
+  }
 }
-};
 
-whereAmI('iran');
-console.log('FIRST');
+// loadNPause();
 
-// try{
-//   let y = 1;
-//   const x = 2;
-//   x = 2;
-// }catch(e){
-//   alert(e.message);
-// }
+async function loadAll(imgArr){
+  const imgs = imgArr.map(img => createImage(img));
+  const imgsEl = await Promise.all(imgs);
+  console.log(imgsEl);
+  imgsEl.forEach(img => img.classList.add('parallel'));
+}
+
+loadAll(['./img/img-1.jpg', './img/img-2.jpg']);
+
+
+
+
 
 
 
